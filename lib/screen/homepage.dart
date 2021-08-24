@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:kisik_app/screen/weekMenu.dart';
 import 'package:date_format/date_format.dart';
@@ -11,6 +12,43 @@ Widget realTime() {
           [yyyy, '년 ', mm, '월 ', dd, '일 ', hh, ':', nn, ':', ss, ' ', am]));
     },
   );
+}
+
+Widget horizontalDragAnimate() {
+  List payloadList = ['아침 메뉴', '점심 메뉴', '저녁 메뉴'];
+  return CarouselSlider(
+      options: CarouselOptions(
+        viewportFraction: 0.7,
+        aspectRatio: 2.0,
+        autoPlay: true,
+        enlargeCenterPage: true,
+      ),
+      items: payloadList.map((payload) {
+        return Builder(builder: (BuildContext context) {
+          return Column(
+            children: <Widget>[
+              Text(
+                payload,
+                style: TextStyle(fontSize: 25),
+              ),
+              Flexible(
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  margin: EdgeInsets.symmetric(horizontal: 10.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      width: 1,
+                      color: Colors.orange,
+                    ),
+                    color: Colors.transparent,
+                  ),
+                  //fit: BoxFit.fill,
+                ),
+              ),
+            ],
+          );
+        });
+      }).toList());
 }
 
 class MyHomePage extends StatefulWidget {
@@ -37,6 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: <Widget>[
             realTime(),
+            horizontalDragAnimate(),
           ],
         ),
       ),
