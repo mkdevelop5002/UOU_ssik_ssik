@@ -1,7 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-Widget horizontalDragAnimate(String moring, String lunch, String dinner) {
+Widget horizontalDragAnimate(
+    String moring, String lunch, String dinner, bool load) {
   List payloadList = ['아침 메뉴', '점심 메뉴', '저녁 메뉴'];
   List menuList = [moring, lunch, dinner];
   return CarouselSlider(
@@ -24,10 +25,12 @@ Widget horizontalDragAnimate(String moring, String lunch, String dinner) {
                 child: Container(
                   child: Align(
                     alignment: Alignment.center,
-                    child: Text(
-                      menuList[index],
-                      textAlign: TextAlign.center,
-                    ),
+                    child: load
+                        ? Text(
+                            menuList[index],
+                            textAlign: TextAlign.center,
+                          )
+                        : Text('로딩중입니다...'),
                   ),
                   width: MediaQuery.of(context).size.width,
                   height: 130,
