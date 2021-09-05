@@ -38,7 +38,7 @@ Widget horizontalDragAnimate(
                   decoration: BoxDecoration(
                     border: Border.all(
                       width: 1,
-                      color: Colors.orange,
+                      color: Colors.greenAccent,
                     ),
                     color: Colors.transparent,
                   ),

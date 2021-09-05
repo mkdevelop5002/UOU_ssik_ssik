@@ -42,10 +42,10 @@ class _MyHomePageState extends State<MyHomePage> {
     getDate();
   }
 
+// /kor/CMS/DietMenuMgr/list.do?mCode=MN132&searchDietCategory=3
   getDate() async {
     webScraper = WebScraper('https://www.ulsan.ac.kr');
-    if (await webScraper.loadWebPage(
-        '/kor/CMS/DietMenuMgr/list.do?mCode=MN132&searchDietCategory=3')) {
+    if (await webScraper.loadWebPage('/kor/CMS/DietMenuMgr/list.do')) {
       List<Map<String, dynamic>> morning_results =
           webScraper.getElement('ul.res-depth1 ', ['title']);
       List<Map<String, dynamic>> lunch_results =
@@ -62,8 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
         lunch = lunch_results;
         dinner = dinner_results;
         info_text = info_results[0]['title'];
-        morning_menu =
-            morning_results[weekdayList.indexOf(today_weekday)]['title'];
+        morning_menu = morning_results[weekdayList.indexOf('Monday')]['title'];
         morning_menu = morning_menu.trim();
 
         lunch_menu = lunch_results[weekdayList.indexOf(today_weekday)]['title'];
