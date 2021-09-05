@@ -62,7 +62,8 @@ class _MyHomePageState extends State<MyHomePage> {
         lunch = lunch_results;
         dinner = dinner_results;
         info_text = info_results[0]['title'];
-        morning_menu = morning_results[weekdayList.indexOf('Monday')]['title'];
+        morning_menu =
+            morning_results[weekdayList.indexOf(today_weekday)]['title'];
         morning_menu = morning_menu.trim();
 
         lunch_menu = lunch_results[weekdayList.indexOf(today_weekday)]['title'];
