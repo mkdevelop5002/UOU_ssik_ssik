@@ -21,6 +21,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String lunch_menu = "";
   String dinner_menu = "";
   String info_text = "";
+  String sundayText = '일요일은 식당을 운영하지 않습니다.';
   String today_weekday = DateFormat('EEEE').format(DateTime.now());
   late List<Map<String, dynamic>> morning;
   late List<Map<String, dynamic>> lunch;
@@ -43,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
 // /kor/CMS/DietMenuMgr/list.do?mCode=MN132&searchDietCategory=3
-// /kor/CMS/DietMenuMgr/list.do
+// /kor/CMS/DietMenuMgr/list.do?mCode=MN132&searchDietCategory=1
   getDate() async {
     webScraper = WebScraper('https://www.ulsan.ac.kr');
     if (await webScraper.loadWebPage(
@@ -64,15 +65,19 @@ class _MyHomePageState extends State<MyHomePage> {
         lunch = lunch_results;
         dinner = dinner_results;
         info_text = info_results[0]['title'];
-        morning_menu =
-            morning_results[weekdayList.indexOf(today_weekday)]['title'];
+        morning_menu = today_weekday == 'Sunday'
+            ? sundayText
+            : morning_results[weekdayList.indexOf(today_weekday)]['title'];
         morning_menu = morning_menu.trim();
 
-        lunch_menu = lunch_results[weekdayList.indexOf(today_weekday)]['title'];
+        lunch_menu = today_weekday == 'Sunday'
+            ? sundayText
+            : lunch_results[weekdayList.indexOf(today_weekday)]['title'];
         lunch_menu = lunch_menu.trim();
 
-        dinner_menu =
-            dinner_results[weekdayList.indexOf(today_weekday)]['title'];
+        dinner_menu = today_weekday == 'Sunday'
+            ? sundayText
+            : dinner_results[weekdayList.indexOf(today_weekday)]['title'];
         dinner_menu = dinner_menu.trim();
       });
     }
@@ -113,6 +118,10 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 30,
             ),
             Text('기숙사 식당 문의 : 052-259-2671'),
+            SizedBox(
+              height: 20,
+            ),
+            Text('\u{2714}  매주 식단은 월요일에 업데이트 됩니다.')
           ],
         ),
       ),

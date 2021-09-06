@@ -31,8 +31,8 @@ class weekMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title:
-              Text('기숙사 주간 식단표', style: TextStyle(color: Colors.orangeAccent)),
+          title: Text('기숙사 주간 식단표<점심/저녁>',
+              style: TextStyle(color: Colors.orangeAccent)),
           backgroundColor: Colors.white,
           leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Colors.black),
@@ -42,10 +42,10 @@ class weekMenu extends StatelessWidget {
         body: GridView.count(
             crossAxisCount: 2,
             padding: EdgeInsets.all(16.0),
-            childAspectRatio: 8.0 / 9.0,
+            childAspectRatio: 8.0 / 13.0,
             children: List<Widget>.generate(weekdayList.length, (idx) {
               return weekMenuCard(weekdayList[idx], MenuToString(lunch, idx),
-                  MenuToString(morning, idx));
+                  MenuToString(dinner, idx));
             })));
   }
 }
