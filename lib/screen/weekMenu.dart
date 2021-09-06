@@ -45,7 +45,7 @@ class weekMenu extends StatelessWidget {
             childAspectRatio: 8.0 / 9.0,
             children: List<Widget>.generate(weekdayList.length, (idx) {
               return weekMenuCard(weekdayList[idx], MenuToString(lunch, idx),
-                  MenuToString(morning, idx));
+                  MenuToString(dinner, idx));
             })));
   }
 }
