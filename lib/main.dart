@@ -10,11 +10,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: '기식을 알려줘',
       theme: ThemeData(
+        fontFamily: 'Cafe24',
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: '울산대학교 기숙사 식당 메뉴'),
+      home: MyHomePage(title: '오늘의 기식'),
     );
   }
 }
