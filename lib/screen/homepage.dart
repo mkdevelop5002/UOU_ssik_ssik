@@ -113,6 +113,10 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 30,
             ),
             Text('기숙사 식당 문의 : 052-259-2671'),
+            SizedBox(
+              height: 30,
+            ),
+            Text(' \u{2714} 식단표는 매주 월요일 점심에 업데이트 됩니다.')
           ],
         ),
       ),
