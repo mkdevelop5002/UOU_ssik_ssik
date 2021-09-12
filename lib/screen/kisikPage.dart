@@ -3,7 +3,7 @@ import 'package:kisik_app/utils/horizontalAnimate.dart';
 import 'package:kisik_app/utils/realTime.dart';
 
 Widget kisikPage(String morning_menu, String lunch_menu, String dinner_menu,
-    bool load, String info_text, bool checkMenu) {
+    bool load, String info_text, bool checkMenu, int todayWeek) {
   String haksik_time = '[조식 시간]08:00~10:00\n\n[중식 시간]10:00~14:00\n';
   String kisik_time =
       '[조식]08:00~09:00\n[중식]12:00~13:30 (공휴일,토요일 12:00~13:00)\n[석식]17:00~18:00 (공휴일,토요일 17:00~18:00)\n';
@@ -23,7 +23,7 @@ Widget kisikPage(String morning_menu, String lunch_menu, String dinner_menu,
           height: 30,
         ),
         horizontalDragAnimate(
-            morning_menu, lunch_menu, dinner_menu, load, checkMenu),
+            morning_menu, lunch_menu, dinner_menu, load, checkMenu, todayWeek),
         Text(checkMenu == true ? haksik_time : kisik_time),
         SizedBox(
           height: 10,

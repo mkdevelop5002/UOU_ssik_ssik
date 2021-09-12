@@ -149,10 +149,22 @@ class _MyHomePageState extends State<MyHomePage> {
                 ]),
               ),
               body: TabBarView(children: [
-                kisikPage(morning_menu_haksik, lunch_menu_haksik,
-                    dinner_menu_haksik, load2, info_text_haksik, true),
-                kisikPage(morning_menu_kisik, lunch_menu_kisik,
-                    dinner_menu_kisik, load, info_text_kisik, false),
+                kisikPage(
+                    morning_menu_haksik,
+                    lunch_menu_haksik,
+                    dinner_menu_haksik,
+                    load2,
+                    info_text_haksik,
+                    true,
+                    weekdayList.indexOf(today_weekday)),
+                kisikPage(
+                    morning_menu_kisik,
+                    lunch_menu_kisik,
+                    dinner_menu_kisik,
+                    load,
+                    info_text_kisik,
+                    false,
+                    weekdayList.indexOf(today_weekday)),
               ]),
               floatingActionButton: FloatingActionButton(
                 onPressed: () {
