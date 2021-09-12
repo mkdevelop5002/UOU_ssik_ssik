@@ -12,11 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: '기식을 알려줘',
-      theme: ThemeData(
-        fontFamily: 'Cafe24',
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: '오늘의 기식'),
+      home: MyHomePage(title: '울산대 오늘의 식당'),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:kisik_app/screen/kisikPage.dart';
 import 'package:kisik_app/screen/weekMenu.dart';
 import 'package:kisik_app/utils/horizontalAnimate.dart';
 import 'package:kisik_app/utils/realTime.dart';
@@ -15,16 +16,25 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  late WebScraper webScraper;
+  late WebScraper webScraperKisik;
+  late WebScraper webScraperHaksik;
   bool load = false;
-  String morning_menu = "";
-  String lunch_menu = "";
-  String dinner_menu = "";
-  String info_text = "";
+  bool load2 = false;
+  String morning_menu_kisik = "";
+  String lunch_menu_kisik = "";
+  String dinner_menu_kisik = "";
+  String info_text_kisik = "";
+  String morning_menu_haksik = "";
+  String lunch_menu_haksik = "";
+  String dinner_menu_haksik = "";
+  String info_text_haksik = "";
   String today_weekday = DateFormat('EEEE').format(DateTime.now());
-  late List<Map<String, dynamic>> morning;
-  late List<Map<String, dynamic>> lunch;
-  late List<Map<String, dynamic>> dinner;
+  late List<Map<String, dynamic>> morning_kisik;
+  late List<Map<String, dynamic>> lunch_kisik;
+  late List<Map<String, dynamic>> dinner_kisik;
+  late List<Map<String, dynamic>> morning_haksik;
+  late List<Map<String, dynamic>> lunch_haksik;
+  late List<Map<String, dynamic>> dinner_haksik;
 
   List weekdayList = [
     'Monday',
@@ -39,99 +49,154 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    getDate();
+    getDateKisik();
+    getDateHaksik();
   }
 
 // /kor/CMS/DietMenuMgr/list.do?mCode=MN132&searchDietCategory=3
 // /kor/CMS/DietMenuMgr/list.do
-  getDate() async {
-    webScraper = WebScraper('https://www.ulsan.ac.kr');
-    if (await webScraper.loadWebPage(
+  getDateKisik() async {
+    webScraperKisik = WebScraper('https://www.ulsan.ac.kr');
+    if (await webScraperKisik.loadWebPage(
         '/kor/CMS/DietMenuMgr/list.do?mCode=MN132&searchDietCategory=3')) {
-      List<Map<String, dynamic>> morning_results =
-          webScraper.getElement('ul.res-depth1 ', ['title']);
-      List<Map<String, dynamic>> lunch_results =
-          webScraper.getElement('ul.res-depth2 ', ['title']);
-      List<Map<String, dynamic>> dinner_results =
-          webScraper.getElement('ul.res-depth3 ', ['title']);
+      List<Map<String, dynamic>> morning_results_kisik =
+          webScraperKisik.getElement('ul.res-depth1 ', ['title']);
+      List<Map<String, dynamic>> lunch_results_kisik =
+          webScraperKisik.getElement('ul.res-depth2 ', ['title']);
+      List<Map<String, dynamic>> dinner_results_kisik =
+          webScraperKisik.getElement('ul.res-depth3 ', ['title']);
 
-      List<Map<String, dynamic>> info_results =
-          webScraper.getElement('div.txt', ['title']);
+      List<Map<String, dynamic>> info_results_kisik =
+          webScraperKisik.getElement('div.txt', ['title']);
 
       setState(() {
         load = true;
-        morning = morning_results;
-        lunch = lunch_results;
-        dinner = dinner_results;
-        info_text = info_results[0]['title'];
-        morning_menu =
-            morning_results[weekdayList.indexOf(today_weekday)]['title'];
-        morning_menu = morning_menu.trim();
+        morning_kisik = morning_results_kisik;
+        lunch_kisik = lunch_results_kisik;
+        dinner_kisik = dinner_results_kisik;
+        info_text_kisik = info_results_kisik[0]['title'];
+        morning_menu_kisik =
+            morning_results_kisik[weekdayList.indexOf(today_weekday)]['title'];
+        morning_menu_kisik = morning_menu_kisik.trim();
 
-        lunch_menu = lunch_results[weekdayList.indexOf(today_weekday)]['title'];
-        lunch_menu = lunch_menu.trim();
+        lunch_menu_kisik =
+            lunch_results_kisik[weekdayList.indexOf(today_weekday)]['title'];
+        lunch_menu_kisik = lunch_menu_kisik.trim();
 
-        dinner_menu =
-            dinner_results[weekdayList.indexOf(today_weekday)]['title'];
-        dinner_menu = dinner_menu.trim();
+        dinner_menu_kisik =
+            dinner_results_kisik[weekdayList.indexOf(today_weekday)]['title'];
+        dinner_menu_kisik = dinner_menu_kisik.trim();
+      });
+    }
+  }
+
+  getDateHaksik() async {
+    webScraperHaksik = WebScraper('https://www.ulsan.ac.kr');
+    if (await webScraperHaksik.loadWebPage(
+        '/kor/CMS/DietMenuMgr/list.do?mCode=MN132&searchDietCategory=1')) {
+      List<Map<String, dynamic>> morning_results_haksik =
+          webScraperHaksik.getElement('ul.res-depth1 ', ['title']);
+      List<Map<String, dynamic>> lunch_results_haksik =
+          webScraperHaksik.getElement('ul.res-depth2 ', ['title']);
+      List<Map<String, dynamic>> dinner_results_haksik =
+          webScraperHaksik.getElement('ul.res-depth4 ', ['title']);
+
+      List<Map<String, dynamic>> info_results_haksik =
+          webScraperHaksik.getElement('div.txt', ['title']);
+
+      setState(() {
+        load2 = true;
+        morning_haksik = morning_results_haksik;
+        lunch_haksik = lunch_results_haksik;
+        dinner_haksik = dinner_results_haksik;
+        info_text_haksik = info_results_haksik[0]['title'];
+        morning_menu_haksik =
+            morning_results_haksik[weekdayList.indexOf(today_weekday)]['title'];
+        morning_menu_haksik = morning_menu_haksik.trim();
+
+        lunch_menu_haksik =
+            lunch_results_haksik[weekdayList.indexOf(today_weekday)]['title'];
+        lunch_menu_haksik = lunch_menu_haksik.trim();
+
+        dinner_menu_haksik =
+            dinner_results_haksik[weekdayList.indexOf(today_weekday)]['title'];
+        dinner_menu_haksik = dinner_menu_haksik.trim();
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          widget.title,
-          style: TextStyle(color: Colors.orangeAccent),
+    return MaterialApp(
+        theme: ThemeData(
+          fontFamily: 'Cafe24',
+          primarySwatch: Colors.blue,
         ),
-        backgroundColor: Colors.white,
-      ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            SizedBox(
-              height: 30,
-            ),
-            realTime(),
-            SizedBox(
-              height: 30,
-            ),
-            horizontalDragAnimate(morning_menu, lunch_menu, dinner_menu, load),
-            Text(
-                '[조식]08:00~09:00\n[중식]12:00~13:30 (공휴일,토요일 12:00~13:00)\n[석식]17:00~18:00 (공휴일,토요일 17:00~18:00)\n'),
-            SizedBox(
-              height: 30,
-            ),
-            Text(info_text),
-            SizedBox(
-              height: 30,
-            ),
-            Text('기숙사 식당 위치 : 무거관 1층'),
-            SizedBox(
-              height: 30,
-            ),
-            Text('기숙사 식당 문의 : 052-259-2671'),
-            SizedBox(
-              height: 30,
-            ),
-            Text(' \u{2714} 식단표는 매주 월요일 점심에 업데이트 됩니다.')
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    weekMenu(morning: morning, lunch: lunch, dinner: dinner)),
-          );
-        },
-        tooltip: '주간 식단표 보기',
-        child: Icon(Icons.assignment_sharp),
-      ),
-    );
+        debugShowCheckedModeBanner: false,
+        home: DefaultTabController(
+          length: 2,
+          child: Builder(builder: (BuildContext context) {
+            return Scaffold(
+              appBar: AppBar(
+                title: Text(
+                  widget.title,
+                  style: TextStyle(color: Colors.orange),
+                ),
+                backgroundColor: Colors.white,
+                bottom: TabBar(labelColor: Colors.orange, tabs: [
+                  Tab(text: '학식이'),
+                  Tab(text: '기식이'),
+                ]),
+              ),
+              body: TabBarView(children: [
+                kisikPage(
+                    morning_menu_haksik,
+                    lunch_menu_haksik,
+                    dinner_menu_haksik,
+                    load2,
+                    info_text_haksik,
+                    true,
+                    weekdayList.indexOf(today_weekday)),
+                kisikPage(
+                    morning_menu_kisik,
+                    lunch_menu_kisik,
+                    dinner_menu_kisik,
+                    load,
+                    info_text_kisik,
+                    false,
+                    weekdayList.indexOf(today_weekday)),
+              ]),
+              floatingActionButton: FloatingActionButton(
+                onPressed: () {
+                  if (DefaultTabController.of(context)!.index == 1) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => weekMenu(
+                                morning: morning_kisik,
+                                lunch: lunch_kisik,
+                                dinner: dinner_kisik,
+                                checkWeek: 1,
+                              )),
+                    );
+                  } else {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => weekMenu(
+                                morning: morning_haksik,
+                                lunch: lunch_haksik,
+                                dinner: dinner_haksik,
+                                checkWeek: 0,
+                              )),
+                    );
+                  }
+                },
+                tooltip: '주간 식단표 보기',
+                child: Icon(Icons.assignment_sharp),
+              ),
+            );
+          }),
+        ));
   }
 }

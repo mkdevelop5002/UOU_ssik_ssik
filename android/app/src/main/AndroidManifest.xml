@@ -2,7 +2,7 @@
     package="com.mikseoo.kisik_app">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="울산대 기식이"
+        android:label="울산대 씩씩이"
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true">
     
