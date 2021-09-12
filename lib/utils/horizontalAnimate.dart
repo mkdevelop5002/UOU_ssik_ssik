@@ -21,7 +21,7 @@ Widget horizontalDragAnimate(
             children: <Widget>[
               Text(
                 payload,
-                style: TextStyle(fontSize: 25),
+                style: TextStyle(fontSize: 20),
               ),
               Flexible(
                 child: Container(

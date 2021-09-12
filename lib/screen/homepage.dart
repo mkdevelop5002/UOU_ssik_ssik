@@ -128,58 +128,63 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        theme: ThemeData(
+          fontFamily: 'Cafe24',
+          primarySwatch: Colors.blue,
+        ),
+        debugShowCheckedModeBanner: false,
         home: DefaultTabController(
-      length: 2,
-      child: Builder(builder: (BuildContext context) {
-        return Scaffold(
-          appBar: AppBar(
-            title: Text(
-              widget.title,
-              style: TextStyle(color: Colors.orangeAccent),
-            ),
-            backgroundColor: Colors.white,
-            bottom: TabBar(labelColor: Colors.orangeAccent, tabs: [
-              Tab(text: '학식이'),
-              Tab(text: '기식이'),
-            ]),
-          ),
-          body: TabBarView(children: [
-            kisikPage(morning_menu_haksik, lunch_menu_haksik,
-                dinner_menu_haksik, load2, info_text_haksik, true),
-            kisikPage(morning_menu_kisik, lunch_menu_kisik, dinner_menu_kisik,
-                load, info_text_kisik, false),
-          ]),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              if (DefaultTabController.of(context)!.index == 1) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => weekMenu(
-                            morning: morning_kisik,
-                            lunch: lunch_kisik,
-                            dinner: dinner_kisik,
-                            checkWeek: 1,
-                          )),
-                );
-              } else {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => weekMenu(
-                            morning: morning_haksik,
-                            lunch: lunch_haksik,
-                            dinner: dinner_haksik,
-                            checkWeek: 0,
-                          )),
-                );
-              }
-            },
-            tooltip: '주간 식단표 보기',
-            child: Icon(Icons.assignment_sharp),
-          ),
-        );
-      }),
-    ));
+          length: 2,
+          child: Builder(builder: (BuildContext context) {
+            return Scaffold(
+              appBar: AppBar(
+                title: Text(
+                  widget.title,
+                  style: TextStyle(color: Colors.orange),
+                ),
+                backgroundColor: Colors.white,
+                bottom: TabBar(labelColor: Colors.orange, tabs: [
+                  Tab(text: '학식이'),
+                  Tab(text: '기식이'),
+                ]),
+              ),
+              body: TabBarView(children: [
+                kisikPage(morning_menu_haksik, lunch_menu_haksik,
+                    dinner_menu_haksik, load2, info_text_haksik, true),
+                kisikPage(morning_menu_kisik, lunch_menu_kisik,
+                    dinner_menu_kisik, load, info_text_kisik, false),
+              ]),
+              floatingActionButton: FloatingActionButton(
+                onPressed: () {
+                  if (DefaultTabController.of(context)!.index == 1) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => weekMenu(
+                                morning: morning_kisik,
+                                lunch: lunch_kisik,
+                                dinner: dinner_kisik,
+                                checkWeek: 1,
+                              )),
+                    );
+                  } else {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => weekMenu(
+                                morning: morning_haksik,
+                                lunch: lunch_haksik,
+                                dinner: dinner_haksik,
+                                checkWeek: 0,
+                              )),
+                    );
+                  }
+                },
+                tooltip: '주간 식단표 보기',
+                child: Icon(Icons.assignment_sharp),
+              ),
+            );
+          }),
+        ));
   }
 }
