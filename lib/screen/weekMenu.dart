@@ -3,7 +3,8 @@ import 'package:kisik_app/utils/weekMenuCard.dart';
 
 MenuToString(List<Map<String, dynamic>> LunchDinner, int idx) {
   String MenuText;
-  MenuText = LunchDinner[weekdayList.indexOf(weekdayList[idx])]['title'].trim();
+  String AppbarTitleText = MenuText =
+      LunchDinner[weekdayList.indexOf(weekdayList[idx])]['title'].trim();
   return MenuText;
 }
 
@@ -21,18 +22,21 @@ class weekMenu extends StatelessWidget {
       {Key? key,
       required this.morning,
       required this.lunch,
-      required this.dinner})
+      required this.dinner,
+      required this.checkWeek})
       : super(key: key);
   final List<Map<String, dynamic>> morning;
   final List<Map<String, dynamic>> lunch;
   final List<Map<String, dynamic>> dinner;
+  final int checkWeek;
 
   @override
   Widget build(BuildContext context) {
+    String weekTitleText = checkWeek == 0 ? '학생식당 주간 식단표' : '기숙사 주간 식단표';
     return Scaffold(
         appBar: AppBar(
           title:
-              Text('기숙사 주간 식단표', style: TextStyle(color: Colors.orangeAccent)),
+              Text(weekTitleText, style: TextStyle(color: Colors.orangeAccent)),
           backgroundColor: Colors.white,
           leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Colors.black),
