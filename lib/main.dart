@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Cafe24',
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: '오늘의 기식'),
+      home: MyHomePage(title: '울산대 오늘의 식당'),
     );
   }
 }
