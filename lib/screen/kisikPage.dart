@@ -6,7 +6,7 @@ Widget kisikPage(String morning_menu, String lunch_menu, String dinner_menu,
     bool load, String info_text, bool checkMenu, int todayWeek) {
   String haksik_time = '[조식 시간]08:00~10:00\n\n[중식 시간]10:00~14:00\n';
   String kisik_time =
-      '[조식]08:00~09:00\n[중식]12:00~13:30 (공휴일,토요일 12:00~13:00)\n[석식]17:00~18:00 (공휴일,토요일 17:00~18:00)\n';
+      '[조식]07:30~09:00\n[중식]11:30~13:30 (공휴일,토요일 12:00~13:00)\n[석식]17:00~18:30 (공휴일,토요일 17:00~18:00)\n';
   String haksik_loc_text = '학생 식당 위치 : 1층 학생식당';
   String haksik_tel_text = '학생 식당 문의 : 052-259-2026';
   String kisik_loc_text = '기숙사 식당 위치 : 무거관 1층';
