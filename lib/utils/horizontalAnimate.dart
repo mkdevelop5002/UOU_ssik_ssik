@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:kisik_app/utils/starRating.dart';
 
 Widget horizontalDragAnimate(String moring, String lunch, String dinner,
     bool load, bool checkMenu, int todayWeek) {
@@ -25,29 +26,50 @@ Widget horizontalDragAnimate(String moring, String lunch, String dinner,
                 style: TextStyle(fontSize: 20),
               ),
               Flexible(
-                child: Container(
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: load
-                        ? Text(
-                            todayWeek == 6 ? sundayText : menuList[index],
-                            textAlign: TextAlign.center,
-                          )
-                        : Text('로딩중입니다...'),
-                  ),
-                  width: MediaQuery.of(context).size.width,
-                  height: 130,
-                  margin: EdgeInsets.symmetric(horizontal: 5.0),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(30.0),
-                    border: Border.all(
-                      width: 1.0,
-                      color: Colors.greenAccent,
+                child: GestureDetector(
+                  onTap: () async {
+                    String result = await showDialog(
+                        context: context,
+                        barrierDismissible: true,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0)),
+                            //Dialog Main Title
+                            title: Column(
+                              children: <Widget>[
+                                new Text("이 메뉴는 어땠나요?"),
+                                showRatingAppDialog()
+                              ],
+                            ),
+                          );
+                        });
+                  },
+                  child: Container(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: load
+                          ? Text(
+                              todayWeek == 6 ? sundayText : menuList[index],
+                              textAlign: TextAlign.center,
+                            )
+                          : Text('로딩중입니다...'),
                     ),
-                    color: Colors.transparent,
+                    width: MediaQuery.of(context).size.width,
+                    height: 130,
+                    margin: EdgeInsets.symmetric(horizontal: 5.0),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(30.0),
+                      border: Border.all(
+                        width: 1.0,
+                        color: Colors.greenAccent,
+                      ),
+                      color: Colors.transparent,
+                    ),
+
+                    //fit: BoxFit.fill,
                   ),
-                  //fit: BoxFit.fill,
                 ),
               ),
             ],
