@@ -39,7 +39,22 @@ Widget horizontalDragAnimate(String moring, String lunch, String dinner,
                             title: Column(
                               children: <Widget>[
                                 new Text("이 메뉴는 어땠나요?"),
-                                showRatingAppDialog()
+                                showRatingAppDialog(),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text('확인')),
+                                    TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text('취소'))
+                                  ],
+                                )
                               ],
                             ),
                           );
