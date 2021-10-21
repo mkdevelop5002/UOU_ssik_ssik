@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:kisik_app/utils/starRating.dart';
 
 Widget horizontalDragAnimate(String moring, String lunch, String dinner,
@@ -18,9 +19,20 @@ Widget horizontalDragAnimate(String moring, String lunch, String dinner,
       ),
       items: payloadList.map((payload) {
         var index = payloadList.indexOf(payload);
+        double starpoint = 0;
         return Builder(builder: (BuildContext context) {
           return Column(
             children: <Widget>[
+              RatingBarIndicator(
+                rating: starpoint,
+                itemBuilder: (context, index) => Icon(
+                  Icons.star,
+                  color: Colors.amber,
+                ),
+                itemCount: 5,
+                itemSize: 20.0,
+                direction: Axis.horizontal,
+              ),
               Text(
                 payload,
                 style: TextStyle(fontSize: 20),
@@ -28,7 +40,7 @@ Widget horizontalDragAnimate(String moring, String lunch, String dinner,
               Flexible(
                 child: GestureDetector(
                   onTap: () async {
-                    String result = await showDialog(
+                    var result = await showDialog(
                         context: context,
                         barrierDismissible: true,
                         builder: (BuildContext context) {
@@ -39,13 +51,55 @@ Widget horizontalDragAnimate(String moring, String lunch, String dinner,
                             title: Column(
                               children: <Widget>[
                                 new Text("이 메뉴는 어땠나요?"),
-                                showRatingAppDialog(),
+                                RatingBar.builder(
+                                  initialRating: 0,
+                                  minRating: 1,
+                                  direction: Axis.horizontal,
+                                  allowHalfRating: true,
+                                  itemCount: 5,
+                                  itemPadding:
+                                      EdgeInsets.symmetric(horizontal: 4.0),
+                                  itemBuilder: (context, _) => Icon(
+                                    Icons.star,
+                                    color: Colors.amber,
+                                  ),
+                                  onRatingUpdate: (rating) {
+                                    starpoint = rating;
+                                  },
+                                ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     TextButton(
                                         onPressed: () {
                                           Navigator.pop(context);
+                                          print(starpoint);
+                                          showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10.0)),
+                                                title: new Text("평가가 완료되었습니다.",
+                                                    textAlign:
+                                                        TextAlign.center),
+                                                content: new Text("감사합니다 :)",
+                                                    textAlign:
+                                                        TextAlign.center),
+                                                actions: <Widget>[
+                                                  new TextButton(
+                                                    child: new Text("확인"),
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
                                         },
                                         child: Text('확인')),
                                     TextButton(

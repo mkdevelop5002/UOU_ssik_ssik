@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-Widget showRatingAppDialog() {
+Widget showRatingAppDialog(double starpoint) {
+  double starPT = starpoint;
   return RatingBar.builder(
     initialRating: 3,
     minRating: 1,
@@ -14,6 +15,7 @@ Widget showRatingAppDialog() {
       color: Colors.amber,
     ),
     onRatingUpdate: (rating) {
+      starPT = rating;
       print(rating);
     },
   );
