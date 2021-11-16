@@ -6,4 +6,5 @@
 - 제작기간 : 7일
 - 현재 사용자 21.11.16 기준 : 160여명 
 - 다운로드 링크 : https://play.google.com/store/apps/details?id=com.mikseoo.kisik_app
+---
 ![기식이_그래픽이미지](https://user-images.githubusercontent.com/60573093/141885844-c786cc46-e441-4a2e-a3fe-5f2cb9d149fe.jpg)
