@@ -8,3 +8,7 @@
 - 다운로드 링크 : https://play.google.com/store/apps/details?id=com.mikseoo.kisik_app
 ---
 ![기식이_그래픽이미지](https://user-images.githubusercontent.com/60573093/141885844-c786cc46-e441-4a2e-a3fe-5f2cb9d149fe.jpg)
+
+
+---
+- 실행 영상 : https://youtu.be/73-uH4yAhq0
